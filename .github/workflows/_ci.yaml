@@ -1,0 +1,10 @@
+on:
+  workflow_call:
+
+permissions: {}
+
+jobs:
+  test:
+    uses: $/.github/workflows/_test.yaml
+    permissions:
+      contents: read

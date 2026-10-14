@@ -1,0 +1,28 @@
+name: Build and test
+
+on:
+  workflow_call:
+
+permissions: {}
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    timeout-minutes: 20
+    permissions:
+      contents: read
+    steps:
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false
+      - uses: $/.github/actions/setup-tools
+      - name: Build
+        run: make build
+      - name: Lint Go and workflows
+        run: make lint
+      - name: Test
+        run: make test
+      - name: Validate and package both release architectures
+        run: make release-snapshot
+      - name: Check clean
+        run: make check-clean

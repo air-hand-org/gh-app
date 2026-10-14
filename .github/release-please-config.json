@@ -1,0 +1,12 @@
+{
+  "packages": {
+    ".": {
+      "release-type": "go",
+      "package-name": "gh-app",
+      "draft": true,
+      "include-component-in-tag": false,
+      "force-tag-creation": true,
+      "initial-version": "0.1.0"
+    }
+  }
+}
