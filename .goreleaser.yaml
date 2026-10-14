@@ -1,0 +1,41 @@
+version: 2
+
+project_name: gh-app
+
+builds:
+  - id: gh-app
+    main: ./cmd/gh-app
+    binary: gh-app
+    env:
+      - CGO_ENABLED=0
+    goos:
+      - linux
+    goarch:
+      - amd64
+      - arm64
+    ldflags:
+      - -s -w -X main.version={{ .Version }}
+
+archives:
+  - id: default
+    formats:
+      - tar.gz
+    name_template: "{{ .ProjectName }}_{{ .Version }}_{{ .Os }}_{{ .Arch }}"
+    files:
+      - LICENSE
+      - README.md
+
+checksum:
+  name_template: "{{ .ProjectName }}_{{ .Version }}_checksums.txt"
+  algorithm: sha256
+
+changelog:
+  disable: true
+
+release:
+  github:
+    owner: air-hand-org
+    name: gh-app
+  use_existing_draft: true
+  replace_existing_artifacts: true
+  mode: keep-existing
