@@ -7,7 +7,7 @@ setup:
 build:
 	go mod tidy
 	go generate ./...
-	go build -o bin/gh-app ./cmd/gh-app
+	go build -o bin/gh-app ./
 
 .PHONY: fmt
 fmt:
