@@ -16,12 +16,40 @@ func TestRootDependencyChecks(t *testing.T) {
 		envOwner  string
 		missing   string
 	}{
-		{name: "gh always required", available: []string{"git"}, args: []string{"--owner", "org", "--"}, missing: "gh"},
-		{name: "git needed for detection", available: []string{"gh"}, args: []string{"--"}, missing: "git"},
-		{name: "explicit owner skips git", available: []string{"gh"}, args: []string{"--owner", "org", "--"}},
-		{name: "environment owner skips git", available: []string{"gh"}, args: []string{"--"}, envOwner: "org"},
-		{name: "empty owner needs git", available: []string{"gh"}, args: []string{"--owner", "", "--"}, missing: "git"},
-		{name: "detected owner", available: []string{"gh", "git"}, args: []string{"--"}},
+		{
+			name:      "gh always required",
+			available: []string{"git"},
+			args:      []string{"--owner", "org", "--"},
+			missing:   "gh",
+		},
+		{
+			name:      "git needed for detection",
+			available: []string{"gh"},
+			args:      []string{"--"},
+			missing:   "git",
+		},
+		{
+			name:      "explicit owner skips git",
+			available: []string{"gh"},
+			args:      []string{"--owner", "org", "--"},
+		},
+		{
+			name:      "environment owner skips git",
+			available: []string{"gh"},
+			args:      []string{"--"},
+			envOwner:  "org",
+		},
+		{
+			name:      "empty owner needs git",
+			available: []string{"gh"},
+			args:      []string{"--owner", "", "--"},
+			missing:   "git",
+		},
+		{
+			name:      "detected owner",
+			available: []string{"gh", "git"},
+			args:      []string{"--"},
+		},
 	} {
 		t.Run(tt.name, func(t *testing.T) {
 			dir := t.TempDir()
@@ -32,12 +60,24 @@ func TestRootDependencyChecks(t *testing.T) {
 			t.Setenv("GHAPP_OWNER", tt.envOwner)
 			var calls []string
 			cmd, err := newRootCmd(rootDeps{
-				ownerResolver: &OwnerResolverMock{OwnerFunc: func(_ context.Context, _ string) (string, error) { calls = append(calls, "owner"); return "org", nil }},
-				tokenGenerator: &TokenGeneratorMock{NewFunc: func(_ context.Context, _, _, _ string) (string, error) {
-					calls = append(calls, "token")
-					return "token", nil
-				}},
-				ghcliExecutor: &GHCliExecutorMock{ExecFunc: func(_ context.Context, _ string, _ []string) error { calls = append(calls, "exec"); return nil }},
+				ownerResolver: &OwnerResolverMock{
+					OwnerFunc: func(_ context.Context, _ string) (string, error) {
+						calls = append(calls, "owner")
+						return "org", nil
+					},
+				},
+				tokenGenerator: &TokenGeneratorMock{
+					NewFunc: func(_ context.Context, _, _, _ string) (string, error) {
+						calls = append(calls, "token")
+						return "token", nil
+					},
+				},
+				ghcliExecutor: &GHCliExecutorMock{
+					ExecFunc: func(_ context.Context, _ string, _ []string) error {
+						calls = append(calls, "exec")
+						return nil
+					},
+				},
 			})
 			require.NoError(t, err)
 			var output bytes.Buffer
