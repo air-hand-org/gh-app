@@ -22,6 +22,16 @@ jobs:
         run: make lint
       - name: Test
         run: make test
+      - name: Smoke test
+        run: |
+          trap 'rm -f "${GHAPP_PRIVATE_KEY_PATH}"' EXIT
+          echo -n "${GH_APP_RELEASE_PRIVATE_KEY}" > "${GHAPP_PRIVATE_KEY_PATH}"
+          actual="$(./bin/gh-app -- api repos/${GITHUB_REPOSITORY} --jq '.full_name')"
+          test "$actual" = "${GITHUB_REPOSITORY}"
+        env:
+          GHAPP_CLIENT_ID: ${{ vars.GH_APP_RELEASE_CLIENT_ID }}
+          GHAPP_PRIVATE_KEY_PATH: ${{ runner.temp }}/pk
+          GH_APP_RELEASE_PRIVATE_KEY: ${{ secrets.GH_APP_RELEASE_PRIVATE_KEY }}
       - name: Validate and package both release architectures
         run: make release-snapshot
       - name: Check clean

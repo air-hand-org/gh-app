@@ -17,7 +17,7 @@ fmt:
 lint:
 	golangci-lint fmt --diff ./...
 	golangci-lint run ./...
-	zizmor ./
+	zizmor -c .github/linters/zizmor.yaml ./
 
 .PHONY: test
 test: build
