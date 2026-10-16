@@ -1,0 +1,5 @@
+rules:
+  secrets-inherit:
+    ignore:
+      - ci.yaml
+      - _ci.yaml

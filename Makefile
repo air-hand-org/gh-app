@@ -7,7 +7,7 @@ setup:
 build:
 	go mod tidy
 	go generate ./...
-	go build -o bin/gh-app ./cmd/gh-app
+	go build -o bin/gh-app ./
 
 .PHONY: fmt
 fmt:
@@ -17,7 +17,7 @@ fmt:
 lint:
 	golangci-lint fmt --diff ./...
 	golangci-lint run ./...
-	zizmor ./
+	zizmor -c .github/linters/zizmor.yaml ./
 
 .PHONY: test
 test: build
