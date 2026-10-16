@@ -119,12 +119,39 @@ func TestRootCommandUsagePolicy(t *testing.T) {
 		wantError string
 		wantText  string
 	}{
-		{name: "missing separator", args: []string{}, wantError: "Specify that args for gh after", wantText: "Usage:"},
-		{name: "argument before separator", args: []string{"pr", "--", "list"}, wantError: "Do not pass position args before", wantText: "Usage:"},
-		{name: "unknown flag", args: []string{"--unknown"}, wantError: "unknown flag", wantText: "Usage:"},
-		{name: "help", args: []string{"--help"}, wantText: "Usage:"},
-		{name: "skills", args: []string{"skills"}, wantText: "# GitHub App authentication"},
-		{name: "skills help", args: []string{"skills", "--help"}, wantText: "Usage:"},
+		{
+			name:      "missing separator",
+			args:      []string{},
+			wantError: "Specify that args for gh after",
+			wantText:  "Usage:",
+		},
+		{
+			name:      "argument before separator",
+			args:      []string{"pr", "--", "list"},
+			wantError: "Do not pass position args before",
+			wantText:  "Usage:",
+		},
+		{
+			name:      "unknown flag",
+			args:      []string{"--unknown"},
+			wantError: "unknown flag",
+			wantText:  "Usage:",
+		},
+		{
+			name:     "help",
+			args:     []string{"--help"},
+			wantText: "Usage:",
+		},
+		{
+			name:     "skills",
+			args:     []string{"skills"},
+			wantText: "# GitHub App authentication",
+		},
+		{
+			name:     "skills help",
+			args:     []string{"skills", "--help"},
+			wantText: "Usage:",
+		},
 	} {
 		t.Run(tc.name, func(t *testing.T) {
 			t.Parallel()
