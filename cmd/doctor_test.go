@@ -4,7 +4,6 @@ import (
 	"bytes"
 	"os"
 	"path/filepath"
-	"runtime"
 	"testing"
 
 	"github.com/stretchr/testify/require"
@@ -12,9 +11,6 @@ import (
 
 func doctorExecutable(t *testing.T, dir, name string) string {
 	t.Helper()
-	if runtime.GOOS == "windows" {
-		name += ".exe"
-	}
 	path := filepath.Join(dir, name)
 	// LookPath checks executability, not executable file contents.
 	require.NoError(t, os.WriteFile(path, []byte("fixture\n"), 0o755))
@@ -30,9 +26,6 @@ func TestDoctorMissingDependencies(t *testing.T) {
 				availablePath = doctorExecutable(t, dir, available)
 			}
 			t.Setenv("PATH", dir)
-			if runtime.GOOS == "windows" {
-				t.Setenv("PATHEXT", ".EXE")
-			}
 			cmd, err := newRootCmd(rootDeps{})
 			require.NoError(t, err)
 			var output bytes.Buffer
@@ -70,9 +63,6 @@ func TestDoctorCommand(t *testing.T) {
 	ghPath := doctorExecutable(t, dir, "gh")
 	gitPath := doctorExecutable(t, dir, "git")
 	t.Setenv("PATH", dir)
-	if runtime.GOOS == "windows" {
-		t.Setenv("PATHEXT", ".EXE")
-	}
 
 	cmd, err := newRootCmd(rootDeps{})
 	require.NoError(t, err)
