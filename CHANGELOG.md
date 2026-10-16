@@ -1,5 +1,18 @@
 # Changelog
 
+## [0.4.0](https://github.com/air-hand-org/gh-app/compare/v0.3.0...v0.4.0) (2026-10-16)
+
+
+### Features
+
+* add doctor command to check gh and git on PATH ([#15](https://github.com/air-hand-org/gh-app/issues/15)) ([ea727b5](https://github.com/air-hand-org/gh-app/commit/ea727b558a3cdf406ecdb51355a6fb11459fa523))
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/stretchr/testify to v1.12.1 ([#20](https://github.com/air-hand-org/gh-app/issues/20)) ([fefa68d](https://github.com/air-hand-org/gh-app/commit/fefa68d724ae4eeda044592618e378b760deeaea))
+* suppress usage for runtime errors ([#19](https://github.com/air-hand-org/gh-app/issues/19)) ([81f99a9](https://github.com/air-hand-org/gh-app/commit/81f99a902f49d1bb7cb25285c2907f00b529d0ae))
+
 ## [0.3.0](https://github.com/air-hand-org/gh-app/compare/v0.2.0...v0.3.0) (2026-10-16)
 
 
