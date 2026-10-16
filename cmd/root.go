@@ -6,6 +6,7 @@ import (
 	"os/exec"
 	"strings"
 
+	"github.com/air-hand-org/gh-app/internal/dependency"
 	"github.com/air-hand-org/gh-app/internal/gh"
 	"github.com/air-hand-org/gh-app/internal/token"
 	"github.com/cockroachdb/errors"
@@ -53,6 +54,14 @@ func newRootCmd(deps rootDeps) (*cobra.Command, error) {
 			}
 			return nil
 		},
+		PreRunE: func(_ *cobra.Command, _ []string) error {
+			names := []string{"gh"}
+			if v.GetString("owner") == "" {
+				names = append(names, "git")
+			}
+			_, err := dependency.Check(names...)
+			return err
+		},
 		RunE: func(cmd *cobra.Command, args []string) error {
 			owner, err := deps.ownerResolver.Owner(cmd.Context(), v.GetString("owner"))
 			if err != nil {
@@ -76,7 +85,7 @@ func newRootCmd(deps rootDeps) (*cobra.Command, error) {
 	if err != nil {
 		return nil, err
 	}
-	rootCmd.AddCommand(skillsCmd)
+	rootCmd.AddCommand(skillsCmd, newDoctorCmd())
 
 	return rootCmd, nil
 }

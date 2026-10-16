@@ -9,7 +9,9 @@ import (
 )
 
 func TestRootCommand(t *testing.T) {
-	t.Parallel()
+	dir := t.TempDir()
+	doctorExecutable(t, dir, "gh")
+	t.Setenv("PATH", dir)
 
 	expectedOwner := "foobar"
 	expectedClientID := "this.is.client.id"
