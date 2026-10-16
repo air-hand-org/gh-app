@@ -72,6 +72,12 @@ func newRootCmd(deps rootDeps) (*cobra.Command, error) {
 		return nil, err
 	}
 
+	skillsCmd, err := newSkillsCmd(v)
+	if err != nil {
+		return nil, err
+	}
+	rootCmd.AddCommand(skillsCmd)
+
 	return rootCmd, nil
 }
 
