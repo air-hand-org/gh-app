@@ -54,7 +54,8 @@ func newRootCmd(deps rootDeps) (*cobra.Command, error) {
 			}
 			return nil
 		},
-		PreRunE: func(_ *cobra.Command, _ []string) error {
+		PreRunE: func(cmd *cobra.Command, _ []string) error {
+			cmd.SilenceUsage = true
 			names := []string{"gh"}
 			if v.GetString("owner") == "" {
 				names = append(names, "git")
