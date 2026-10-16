@@ -7,7 +7,7 @@ import (
 	"github.com/air-hand-org/gh-app/internal/token/githubapp"
 	"github.com/cockroachdb/errors"
 	"github.com/google/go-github/v92/github"
-	"github.com/jferrl/go-githubauth"
+	"github.com/jferrl/go-githubauth/v2"
 	"golang.org/x/oauth2"
 )
 

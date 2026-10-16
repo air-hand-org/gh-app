@@ -5,7 +5,7 @@ go 1.27.2
 require (
 	github.com/cockroachdb/errors v1.14.0
 	github.com/google/go-github/v92 v92.0.0
-	github.com/jferrl/go-githubauth v1.9.1
+	github.com/jferrl/go-githubauth/v2 v2.0.1
 	github.com/samber/lo v1.53.0
 	github.com/spf13/cobra v1.10.2
 	github.com/spf13/viper v1.21.0
@@ -21,7 +21,6 @@ require (
 	github.com/getsentry/sentry-go v0.46.0 // indirect
 	github.com/go-viper/mapstructure/v2 v2.4.0 // indirect
 	github.com/gogo/protobuf v1.3.2 // indirect
-	github.com/golang-jwt/jwt/v5 v5.3.1 // indirect
 	github.com/google/go-querystring v1.2.0 // indirect
 	github.com/inconshreveable/mousetrap v1.1.0 // indirect
 	github.com/kr/pretty v0.3.1 // indirect
