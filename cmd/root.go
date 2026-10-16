@@ -76,7 +76,7 @@ func newRootCmd(deps rootDeps) (*cobra.Command, error) {
 	if err != nil {
 		return nil, err
 	}
-	rootCmd.AddCommand(skillsCmd)
+	rootCmd.AddCommand(skillsCmd, newDoctorCmd())
 
 	return rootCmd, nil
 }
