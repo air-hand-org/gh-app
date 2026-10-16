@@ -2,6 +2,3 @@
 go = "1.27.2"
 
 [env]
-GOPRIVATE = {
-    default = "github.com/air-hand-org/gh-app"
-}
