@@ -3,10 +3,36 @@ package token
 import (
 	"context"
 	"errors"
+	"fmt"
+	"os"
+	"path/filepath"
 	"testing"
 
 	"github.com/stretchr/testify/require"
 )
+
+func TestGeneratorRejectsUnsafeConfigurationOffline(t *testing.T) {
+	path := filepath.Join(t.TempDir(), "sensitive-path")
+	generator := NewInstallationTokenGenerator()
+	for _, tc := range []struct {
+		clientID, path string
+		expected       error
+	}{
+		{"", path, ErrNotConfigured},
+		{"sensitive-client", path, ErrKeyNotExist},
+	} {
+		value, err := generator.New(t.Context(), "owner", tc.clientID, tc.path)
+		require.Empty(t, value)
+		require.ErrorIs(t, err, tc.expected)
+		require.Nil(t, errors.Unwrap(err))
+		require.NotContains(t, fmt.Sprintf("%+v", err), path)
+	}
+	require.NoError(t, os.WriteFile(path, []byte("sensitive-key"), 0o600))
+	value, err := generator.New(t.Context(), "owner", "client", path)
+	require.Empty(t, value)
+	require.ErrorIs(t, err, ErrInvalidKey)
+	require.NotContains(t, err.Error(), "sensitive-key")
+}
 
 func TestInspectInstallationID(t *testing.T) {
 	t.Parallel()

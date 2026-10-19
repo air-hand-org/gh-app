@@ -2,7 +2,6 @@ package token
 
 import (
 	"context"
-	"os"
 
 	"github.com/air-hand-org/gh-app/internal/token/githubapp"
 	"github.com/cockroachdb/errors"
@@ -37,12 +36,15 @@ func inspectInstallationID(ctx context.Context, owner string, installation Insta
 type installationTokenGenerator struct{}
 
 func (g *installationTokenGenerator) New(ctx context.Context, owner string, clientID string, privateKeyPath string) (string, error) {
-	privateKey, err := os.ReadFile(privateKeyPath)
+	if err := ValidateClientID(clientID); err != nil {
+		return "", err
+	}
+	privateKey, err := ReadPrivateKey(privateKeyPath)
 	if err != nil {
 		return "", err
 	}
 
-	appTokenSource, err := githubauth.NewApplicationTokenSource(
+	appTokenSource, err := NewApplicationTokenSource(
 		clientID,
 		privateKey,
 	)
