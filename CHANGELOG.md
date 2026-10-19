@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.4.1](https://github.com/air-hand-org/gh-app/compare/v0.4.0...v0.4.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/google/go-github/v92 to v93 ([#30](https://github.com/air-hand-org/gh-app/issues/30)) ([971cf2a](https://github.com/air-hand-org/gh-app/commit/971cf2aebbc087ff7a76f3dbd88b9a7ee68e839e))
+
 ## [0.4.0](https://github.com/air-hand-org/gh-app/compare/v0.3.0...v0.4.0) (2026-10-16)
 
 
