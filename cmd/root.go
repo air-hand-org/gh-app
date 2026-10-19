@@ -86,7 +86,7 @@ func newRootCmd(deps rootDeps) (*cobra.Command, error) {
 	if err != nil {
 		return nil, err
 	}
-	rootCmd.AddCommand(skillsCmd, newDoctorCmd())
+	rootCmd.AddCommand(skillsCmd, newDoctorCmd(v))
 
 	return rootCmd, nil
 }
@@ -95,9 +95,9 @@ func initializeFlags(cmd *cobra.Command, v *viper.Viper) error {
 	// Global options
 	cmd.PersistentFlags().String("owner", "", "Specify target owner (org|user) account")
 
-	// Command specific options
-	cmd.Flags().String("client-id", "", "GitHub App Client ID")
-	cmd.Flags().String("private-key-path", "", "GitHub App Private key file path")
+	// App configuration is shared with doctor.
+	cmd.PersistentFlags().String("client-id", "", "GitHub App Client ID")
+	cmd.PersistentFlags().String("private-key-path", "", "GitHub App Private key file path")
 
 	v.SetEnvPrefix("GHAPP")
 	v.SetEnvKeyReplacer(strings.NewReplacer(".", "_", "-", "_"))

@@ -46,6 +46,19 @@ gh-app doctor
 ```
 
 Checks whether `gh` and `git` resolve on `PATH` and prints their resolved paths.
-Both checks are reported, even if a dependency is missing. Exits with status 0
-when both are found, or nonzero otherwise. No owner, authentication, or network
-access is required.
+Also checks that a Client ID is configured, the private-key path points to a
+readable regular file, and the key parses as a supported RSA private key
+(PKCS#1 or PKCS#8 PEM, using the same parser as authentication).
+
+App configuration uses `GHAPP_CLIENT_ID` and `GHAPP_PRIVATE_KEY_PATH`, with
+`--client-id` and `--private-key-path` taking precedence, just as in normal
+execution. Flags can be placed before or after `doctor`.
+
+Each configuration check reports `OK`, `FAIL`, or `SKIP` with a reason. Key
+parsing is skipped when the file is unavailable; other checks still run.
+Exits with status 0 only when all required checks pass, or nonzero otherwise.
+Client ID values, private-key paths and contents, JWTs, and installation tokens
+are not printed. Checks are offline: no owner, authentication, or network
+access is required, and credentials and repository state are not modified.
+A successful local check does not verify installation permissions or that the
+key belongs to the configured App.
