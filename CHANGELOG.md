@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.0](https://github.com/air-hand-org/gh-app/compare/v0.4.1...v0.5.0) (2026-10-19)
+
+
+### Features
+
+* diagnose local GitHub App configuration in doctor ([#39](https://github.com/air-hand-org/gh-app/issues/39)) ([8f9aa20](https://github.com/air-hand-org/gh-app/commit/8f9aa2087620ce5d3ddba14f36feb0f8ebe7d3a8))
+
 ## [0.4.1](https://github.com/air-hand-org/gh-app/compare/v0.4.0...v0.4.1) (2026-10-19)
 
 
