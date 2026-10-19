@@ -27,9 +27,9 @@ jobs:
   check-result:
     needs: ci
     runs-on: ubuntu-slim
-    if: always()
+    if: >-
+      always() &&
+      needs.ci.result != 'success'
     steps:
-      - name: Require successful CI
-        env:
-          CI_RESULT: ${{ needs.ci.result }}
-        run: test "$CI_RESULT" = success
+      - name: exit with failure
+        run: exit 1
