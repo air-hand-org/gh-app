@@ -30,6 +30,21 @@ can be used:
 
     gh-app -- pr list
 
+## Troubleshooting
+
+Use `gh-app doctor` during initial setup or when local configuration changes or
+fails. It is not required before every command once the setup is working.
+
+    gh-app doctor
+
+The checks run offline: `gh` and `git` on PATH, Client ID presence, a readable
+regular private-key file, and a supported RSA private key. Configuration flags
+and environment variables use the same precedence as normal execution.
+Required check failures produce a nonzero exit status. Configuration diagnostics
+do not print the Client ID, private-key path or contents, or generated tokens.
+A successful result does not verify authentication, installation access, or
+repository permissions; diagnose those separately with an authorized API read.
+
 ## Authentication boundaries
 
 - `--owner` selects the installation owner, not the target repository.
