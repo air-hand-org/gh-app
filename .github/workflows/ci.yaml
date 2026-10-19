@@ -7,6 +7,8 @@ on:
   pull_request:
     branches:
       - main
+  merge_group:
+    types: [checks_requested]
 
 permissions: {}
 
@@ -25,9 +27,9 @@ jobs:
   check-result:
     needs: ci
     runs-on: ubuntu-slim
-    if: >-
-      always() &&
-      needs.ci.result != 'success'
+    if: always()
     steps:
-      - name: exit with failure
-        run: exit 1
+      - name: Require successful CI
+        env:
+          CI_RESULT: ${{ needs.ci.result }}
+        run: test "$CI_RESULT" = success
