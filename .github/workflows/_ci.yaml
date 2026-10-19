@@ -4,6 +4,12 @@ on:
 permissions: {}
 
 jobs:
+  codeql:
+    uses: $/.github/workflows/_codeql.yaml
+    permissions:
+      contents: read
+      security-events: write
+
   test:
     uses: $/.github/workflows/_test.yaml
     permissions:
