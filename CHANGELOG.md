@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.5.1](https://github.com/air-hand-org/gh-app/compare/v0.5.0...v0.5.1) (2026-10-19)
+
+
+### Bug Fixes
+
+* include doctor diagnostics guidance in shipped skill ([#41](https://github.com/air-hand-org/gh-app/issues/41)) ([1f0f7ad](https://github.com/air-hand-org/gh-app/commit/1f0f7ad4ee82b56c968c7122c81929eecc317bfc))
+
 ## [0.5.0](https://github.com/air-hand-org/gh-app/compare/v0.4.1...v0.5.0) (2026-10-19)
 
 
