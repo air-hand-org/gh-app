@@ -4,7 +4,7 @@ go 1.27.2
 
 require (
 	github.com/cockroachdb/errors v1.14.0
-	github.com/google/go-github/v92 v92.0.0
+	github.com/google/go-github/v93 v93.0.0
 	github.com/jferrl/go-githubauth v1.9.1
 	github.com/samber/lo v1.53.0
 	github.com/spf13/cobra v1.10.2
