@@ -2,35 +2,12 @@ package cmd
 
 import (
 	"errors"
-	"os"
 
 	"github.com/air-hand-org/gh-app/internal/dependency"
-	"github.com/jferrl/go-githubauth"
+	"github.com/air-hand-org/gh-app/internal/token"
 	"github.com/spf13/cobra"
 	"github.com/spf13/viper"
 )
-
-// readDoctorKey returns only fixed diagnostics: filesystem errors may contain sensitive paths.
-func readDoctorKey(path string) ([]byte, string) {
-	if path == "" {
-		return nil, "not configured"
-	}
-	info, err := os.Stat(path)
-	if errors.Is(err, os.ErrNotExist) {
-		return nil, "file does not exist"
-	}
-	if err != nil {
-		return nil, "file is not accessible"
-	}
-	if !info.Mode().IsRegular() {
-		return nil, "not a regular file"
-	}
-	data, err := os.ReadFile(path)
-	if err != nil {
-		return nil, "file is not readable"
-	}
-	return data, ""
-}
 
 func newDoctorCmd(v *viper.Viper) *cobra.Command {
 	return &cobra.Command{
@@ -47,25 +24,22 @@ func newDoctorCmd(v *viper.Viper) *cobra.Command {
 					cmd.Printf("%s: %s\n", result.Name, result.Path)
 				}
 			}
+			checks := token.CheckConfiguration(v.GetString("client-id"), v.GetString("private-key-path"))
 			failed := false
-			if v.GetString("client-id") == "" {
-				cmd.Println("client-id: FAIL (not configured)")
+			if checks.ClientIDErr != nil {
+				cmd.Printf("client-id: FAIL (%v)\n", checks.ClientIDErr)
 				failed = true
 			} else {
 				cmd.Println("client-id: OK (configured)")
 			}
-			data, reason := readDoctorKey(v.GetString("private-key-path"))
-			if reason != "" {
-				cmd.Printf("private-key-path: FAIL (%s)\n", reason)
+			if checks.KeyFileErr != nil {
+				cmd.Printf("private-key-path: FAIL (%v)\n", checks.KeyFileErr)
 				cmd.Println("private-key: SKIP (file unavailable)")
 				failed = true
 			} else {
 				cmd.Println("private-key-path: OK (readable regular file)")
-				// Use the authentication library's parser without calling Token:
-				// construction is offline and does not generate a JWT. A fixed
-				// issuer keeps key validation independent of missing Client ID.
-				if _, keyErr := githubauth.NewApplicationTokenSource("doctor", data); keyErr != nil {
-					cmd.Println("private-key: FAIL (invalid or unsupported private key)")
+				if checks.KeyErr != nil {
+					cmd.Printf("private-key: FAIL (%v)\n", checks.KeyErr)
 					failed = true
 				} else {
 					cmd.Println("private-key: OK (supported RSA private key)")
