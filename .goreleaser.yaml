@@ -2,6 +2,10 @@ version: 2
 
 project_name: gh-app
 
+before:
+  hooks:
+    - make licenses
+
 builds:
   - id: gh-app
     main: ./
@@ -24,6 +28,9 @@ archives:
     files:
       - LICENSE
       - README.md
+      - src: "third_party/licenses/{{ .Arch }}"
+        dst: THIRD_PARTY_LICENSES
+        strip_parent: false
 
 checksum:
   name_template: "{{ .ProjectName }}_{{ .Version }}_checksums.txt"
