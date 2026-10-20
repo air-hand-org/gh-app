@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.0](https://github.com/air-hand-org/gh-app/compare/v0.5.1...v0.6.0) (2026-10-20)
+
+
+### Features
+
+* package third-party licenses in release archives ([#43](https://github.com/air-hand-org/gh-app/issues/43)) ([8d0f24b](https://github.com/air-hand-org/gh-app/commit/8d0f24bca126c7b5de9dbfcd9490303906f3be89))
+
 ## [0.5.1](https://github.com/air-hand-org/gh-app/compare/v0.5.0...v0.5.1) (2026-10-19)
 
 
