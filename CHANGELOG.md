@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.6.1](https://github.com/air-hand-org/gh-app/compare/v0.6.0...v0.6.1) (2026-10-23)
+
+
+### Bug Fixes
+
+* **deps:** update dependency go to v1.27.3 ([#47](https://github.com/air-hand-org/gh-app/issues/47)) ([6660618](https://github.com/air-hand-org/gh-app/commit/666061817b9e4bc08b3fca8f22b65f4682b996eb))
+
 ## [0.6.0](https://github.com/air-hand-org/gh-app/compare/v0.5.1...v0.6.0) (2026-10-20)
 
 
