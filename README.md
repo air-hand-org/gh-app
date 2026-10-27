@@ -39,6 +39,21 @@ gh-app -- pr list
 Normal execution checks for `gh`, plus `git` when no owner is configured,
 before resolving the owner or creating a token. Successful checks are silent.
 
+## Install the agent skill
+
+Print the embedded skill with `gh-app skills`, or install it into an explicitly
+selected parent directory containing skills:
+
+```sh
+gh-app skills install --skills-dir "./my skills"
+```
+
+This creates `./my skills/gh-app/SKILL.md`, including missing directories, and
+prints the installed path. Existing files are not overwritten; pass `--force`
+to replace one. `--skills-dir` is required. Both skill commands work offline
+without App configuration, authentication, `gh`, or `git`. No agent configuration
+or agent-specific directory is selected automatically.
+
 ## Check local prerequisites
 
 ```sh
