@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.7.0](https://github.com/air-hand-org/gh-app/compare/v0.6.1...v0.7.0) (2026-10-27)
+
+
+### Features
+
+* install embedded skill into an explicit directory ([#57](https://github.com/air-hand-org/gh-app/issues/57)) ([4446c6d](https://github.com/air-hand-org/gh-app/commit/4446c6da5759db1e339c8dbd32c40cec42386c46))
+
 ## [0.6.1](https://github.com/air-hand-org/gh-app/compare/v0.6.0...v0.6.1) (2026-10-23)
 
 
