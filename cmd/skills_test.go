@@ -29,6 +29,39 @@ func TestSkillsInstallRequiresDirectory(t *testing.T) {
 	}
 }
 
+func TestSkillsInstallValidatesBeforeRun(t *testing.T) {
+	cmd, err := newRootCmd(rootDeps{})
+	require.NoError(t, err)
+	install, _, err := cmd.Find([]string{"skills", "install"})
+	require.NoError(t, err)
+	require.NotNil(t, install.PreRunE)
+	require.ErrorContains(t, install.PreRunE(install, nil), "--skills-dir must not be empty")
+	require.False(t, install.SilenceUsage)
+}
+
+func TestSkillsInstallInvalidInputDoesNotWrite(t *testing.T) {
+	for _, tc := range []struct {
+		name    string
+		args    []string
+		message string
+	}{
+		{name: "extra argument", args: []string{"--skills-dir", "skills", "extra"}, message: "unknown command"},
+		{name: "empty directory", args: []string{"--skills-dir", "", "--force"}, message: "--skills-dir must not be empty"},
+		{name: "missing directory", message: "skills-dir"},
+	} {
+		t.Run(tc.name, func(t *testing.T) {
+			dir := t.TempDir()
+			t.Chdir(dir)
+			output, err := runSkills(t, append([]string{"install"}, tc.args...)...)
+			require.ErrorContains(t, err, tc.message)
+			require.Contains(t, output, "Usage:")
+			entries, err := os.ReadDir(dir)
+			require.NoError(t, err)
+			require.Empty(t, entries)
+		})
+	}
+}
+
 func TestSkillsInstallReplacement(t *testing.T) {
 	dir := t.TempDir()
 	destination := filepath.Join(dir, "gh-app", "SKILL.md")

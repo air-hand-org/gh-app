@@ -28,10 +28,13 @@ func newSkillsCmd(_ *viper.Viper) (*cobra.Command, error) {
 		Use:   "install",
 		Short: "Install SKILL.md into an explicit skills directory",
 		Args:  cobra.NoArgs,
-		RunE: func(cmd *cobra.Command, _ []string) error {
+		PreRunE: func(_ *cobra.Command, _ []string) error {
 			if skillsDir == "" {
 				return fmt.Errorf("--skills-dir must not be empty")
 			}
+			return nil
+		},
+		RunE: func(cmd *cobra.Command, _ []string) error {
 			cmd.SilenceUsage = true
 			dir := filepath.Join(skillsDir, "gh-app")
 			if err := os.MkdirAll(dir, 0o755); err != nil {
