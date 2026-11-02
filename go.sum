@@ -29,8 +29,8 @@ github.com/google/go-querystring v1.2.0 h1:yhqkPbu2/OH+V9BfpCVPZkNmUXhb2gBxJArfh
 github.com/google/go-querystring v1.2.0/go.mod h1:8IFJqpSRITyJ8QhQ13bmbeMBDfmeEJZD5A0egEOmkqU=
 github.com/inconshreveable/mousetrap v1.1.0 h1:wN+x4NVGpMsO7ErUn/mUI3vEoE6Jt13X2s0bqwp9tc8=
 github.com/inconshreveable/mousetrap v1.1.0/go.mod h1:vpF70FUmC8bwa3OWnCshd2FqLfsEA9PFc4w1p2J65bw=
-github.com/jferrl/go-githubauth v1.9.1 h1:gDBgNgPxU4gL0yWKf6FOwKCdLb3ICHPVMQrPEq+xq0I=
-github.com/jferrl/go-githubauth v1.9.1/go.mod h1:HkuzaWMeDf+S09Dq/5wlBwPeho9ZZm3MixLdD2WTqO0=
+github.com/jferrl/go-githubauth v1.11.0 h1:nS7JW2BUGHOZn+MA1/U4cTp9i57VOnIPLjkovYRoZ+E=
+github.com/jferrl/go-githubauth v1.11.0/go.mod h1:HkuzaWMeDf+S09Dq/5wlBwPeho9ZZm3MixLdD2WTqO0=
 github.com/kisielk/errcheck v1.5.0/go.mod h1:pFxgyoBC7bSaBwPgfKdkLd5X25qrDl4LWUI2bnpBCr8=
 github.com/kisielk/gotool v1.0.0/go.mod h1:XhKaO+MFFWcvkIS/tQcRk01m1F5IRFswLeQ+oQHNcck=
 github.com/kr/pretty v0.3.1 h1:flRD4NNwYAUpkphVc1HcthR4KEIFJ65n8Mw5qdRn3LE=
