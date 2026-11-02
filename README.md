@@ -39,6 +39,31 @@ gh-app -- pr list
 Normal execution checks for `gh`, plus `git` when no owner is configured,
 before resolving the owner or creating a token. Successful checks are silent.
 
+## Commit identity
+
+```sh
+gh-app identity --json
+gh-app git-config           # repository-local (default)
+gh-app git-config --local   # explicitly repository-local
+gh-app git-config --global  # explicitly opt into global configuration
+```
+
+`identity` authenticates as the configured App to fetch its slug, then resolves
+its public bot account. It prints `login <email>` by default; `--json` returns
+`id`, `login`, `name`, and `email`. `name` is the bot login and the email is
+`ID+LOGIN@users.noreply.github.com`. Neither command needs `gh` or an installation
+owner; App configuration flags and environment variables work as above. They
+require network access; the public bot lookup is unauthenticated and subject to
+GitHub's public API rate limit. Credentials and tokens are never printed.
+
+`git-config` requires Git and replaces `user.name` and `user.email` in the chosen
+scope. Local scope requires a Git repository; `--local` and `--global` are
+mutually exclusive. Existing values in that scope are overwritten; other scopes
+are unchanged. Authentication failure writes nothing. The two Git config writes
+are sequential, not transactional: a write failure can leave a partial update.
+This changes future commit attribution, not push authentication or existing
+commits.
+
 ## Install the agent skill
 
 Print the embedded skill with `gh-app skills`, or install it into an explicitly

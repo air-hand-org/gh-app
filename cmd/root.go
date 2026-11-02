@@ -32,9 +32,10 @@ type GHCliExecutor interface {
 }
 
 type rootDeps struct {
-	ownerResolver  OwnerResolver
-	tokenGenerator TokenGenerator
-	ghcliExecutor  GHCliExecutor
+	identityResolver IdentityResolver
+	ownerResolver    OwnerResolver
+	tokenGenerator   TokenGenerator
+	ghcliExecutor    GHCliExecutor
 }
 
 func newRootCmd(deps rootDeps) (*cobra.Command, error) {
@@ -86,7 +87,7 @@ func newRootCmd(deps rootDeps) (*cobra.Command, error) {
 	if err != nil {
 		return nil, err
 	}
-	rootCmd.AddCommand(skillsCmd, newDoctorCmd(v))
+	rootCmd.AddCommand(skillsCmd, newDoctorCmd(v), newIdentityCmd(v, deps.identityResolver), newGitConfigCmd(v, deps.identityResolver))
 
 	return rootCmd, nil
 }
@@ -113,9 +114,10 @@ func initializeFlags(cmd *cobra.Command, v *viper.Viper) error {
 // This is called by main.main(). It only needs to happen once to the rootCmd.
 func Execute() {
 	rootCmd, err := newRootCmd(rootDeps{
-		ownerResolver:  gh.NewOwnerResolver(),
-		tokenGenerator: token.NewInstallationTokenGenerator(),
-		ghcliExecutor:  gh.NewGHCliExecutor(),
+		identityResolver: token.NewIdentityResolver(),
+		ownerResolver:    gh.NewOwnerResolver(),
+		tokenGenerator:   token.NewInstallationTokenGenerator(),
+		ghcliExecutor:    gh.NewGHCliExecutor(),
 	})
 	if err != nil {
 		os.Exit(1)

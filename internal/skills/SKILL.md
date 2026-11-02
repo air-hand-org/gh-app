@@ -30,6 +30,29 @@ can be used:
 
     gh-app -- pr list
 
+## Commit identity
+
+Resolve the bot from the authenticated App, never from a PR author or a guessed
+App name:
+
+    gh-app identity --json
+    gh-app git-config
+
+`identity --json` returns the bot's `id`, `login`, `name` (the bot login), and
+`email` (`ID+LOGIN@users.noreply.github.com`). Without `--json`, it prints
+`login <email>`. Both commands use the configured Client ID/private key directly;
+no installation owner or `gh` binary is required. They require network access;
+the public bot lookup is unauthenticated and subject to public API rate limits.
+
+`git-config` requires Git and overwrites `user.name` and `user.email` locally in
+the current repository by default. Use `--local` to make this explicit. Use
+`--global` only when the user requests a global change; the flags are mutually
+exclusive. Authentication errors write nothing; config write failures can leave
+a partial update. Verify both values with `git config --local --get user.name`
+and `git config --local --get user.email` (use `--global` for that scope).
+Push credentials do not set author/committer identity. These settings affect
+future commits; do not rewrite existing history unless requested.
+
 ## Troubleshooting
 
 Use `gh-app doctor` during initial setup or when local configuration changes or
