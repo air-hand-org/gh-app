@@ -14,7 +14,7 @@ import (
 )
 
 func TestIdentityCommandsRejectInvalidArguments(t *testing.T) {
-	for _, args := range [][]string{{"git-config-check", "extra"}, {"identity", "extra"}, {"git-config", "extra"}, {"git-config", "--local", "--global"}, {"git-config", "--local=false", "--global"}} {
+	for _, args := range [][]string{{"git-config", "check", "extra"}, {"git-config", "check", "--local"}, {"git-config", "check", "--global"}, {"git-config", "--local", "check"}, {"git-config", "--global", "check"}, {"identity", "extra"}, {"git-config", "extra"}, {"git-config", "--local", "--global"}, {"git-config", "--local=false", "--global"}} {
 		t.Run(args[0]+args[len(args)-1], func(t *testing.T) {
 			cmd, err := newRootCmd(rootDeps{})
 			require.NoError(t, err)
@@ -123,4 +123,16 @@ func TestGitConfigGlobalOutsideRepository(t *testing.T) {
 	require.NoError(t, err)
 	require.Contains(t, string(contents), "app[bot]")
 	require.Contains(t, string(contents), "456+app[bot]@users.noreply.github.com")
+}
+
+func TestGitConfigCheckIsNotATopLevelCommand(t *testing.T) {
+	cmd, err := newRootCmd(rootDeps{})
+	require.NoError(t, err)
+	for _, child := range cmd.Commands() {
+		require.NotEqual(t, "git-config-check", child.Name())
+	}
+	cmd.SetOut(&bytes.Buffer{})
+	cmd.SetErr(&bytes.Buffer{})
+	cmd.SetArgs([]string{"git-config-check"})
+	require.Error(t, cmd.ExecuteContext(t.Context()))
 }

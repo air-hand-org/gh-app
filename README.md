@@ -67,10 +67,10 @@ commits.
 Check without changing configuration:
 
 ```sh
-gh-app git-config-check
+gh-app git-config check
 ```
 
-`git-config-check` compares effective `git config --get user.name` (normal Git
+`git-config check` compares effective `git config --get user.name` (normal Git
 scope precedence) exactly with the authenticated App bot name. It prints
 confirmation and exits 0 on a match; an unset/different name, Git error, or
 App authentication error exits nonzero. Mismatches show actual and expected names.

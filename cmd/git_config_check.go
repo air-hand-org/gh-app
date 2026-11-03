@@ -12,7 +12,7 @@ import (
 
 func newGitConfigCheckCmd(v *viper.Viper, resolver IdentityResolver) *cobra.Command {
 	return &cobra.Command{
-		Use: "git-config-check", Short: "Check effective Git user.name against the authenticated App bot (read-only)", Args: cobra.NoArgs,
+		Use: "check", Short: "Check effective Git user.name against the authenticated App bot (read-only)", Args: cobra.NoArgs,
 		RunE: func(cmd *cobra.Command, _ []string) error {
 			cmd.SilenceUsage = true
 			if _, err := dependency.Check("git"); err != nil {

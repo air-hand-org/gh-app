@@ -58,7 +58,7 @@ func TestGitConfigCheck(t *testing.T) {
 			var output bytes.Buffer
 			cmd.SetOut(&output)
 			cmd.SetErr(&output)
-			cmd.SetArgs([]string{"git-config-check"})
+			cmd.SetArgs([]string{"git-config", "check"})
 			err = cmd.ExecuteContext(t.Context())
 			if tc.want == "" {
 				require.NoError(t, err)

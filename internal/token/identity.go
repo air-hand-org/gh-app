@@ -37,7 +37,8 @@ func (r *identityResolver) Resolve(ctx context.Context, clientID, privateKeyPath
 	if err != nil {
 		return Identity{}, err
 	}
-	// The bot account is public. Do not send an App JWT to the public users API.
+	// Public bot metadata can be read without authentication. Keep the App JWT
+	// scoped to App API requests rather than sending it to the users API.
 	publicClient, err := github.NewClient()
 	if err != nil {
 		return Identity{}, err

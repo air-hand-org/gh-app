@@ -87,7 +87,7 @@ func newRootCmd(deps rootDeps) (*cobra.Command, error) {
 	if err != nil {
 		return nil, err
 	}
-	rootCmd.AddCommand(skillsCmd, newDoctorCmd(v), newIdentityCmd(v, deps.identityResolver), newGitConfigCmd(v, deps.identityResolver), newGitConfigCheckCmd(v, deps.identityResolver))
+	rootCmd.AddCommand(skillsCmd, newDoctorCmd(v), newIdentityCmd(v, deps.identityResolver), newGitConfigCmd(v, deps.identityResolver))
 
 	return rootCmd, nil
 }

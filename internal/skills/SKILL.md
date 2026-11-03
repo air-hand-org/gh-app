@@ -53,7 +53,7 @@ and `git config --local --get user.email` (use `--global` for that scope).
 Push credentials do not set author/committer identity. These settings affect
 future commits; do not rewrite existing history unless requested.
 
-Run `gh-app git-config-check` for a read-only guard before Git operations.
+Run `gh-app git-config check` for a read-only guard before Git operations.
 It compares effective `git config --get user.name` (normal scope precedence)
 exactly against the authenticated App bot name. A match prints confirmation and
 exits 0; an unset/different name, Git error, or authentication error exits

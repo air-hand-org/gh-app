@@ -46,5 +46,6 @@ func newGitConfigCmd(v *viper.Viper, resolver IdentityResolver) *cobra.Command {
 	cmd.Flags().BoolVar(&local, "local", false, "Write repository-local Git config (default)")
 	cmd.Flags().BoolVar(&global, "global", false, "Write global Git config")
 	cmd.MarkFlagsMutuallyExclusive("local", "global")
+	cmd.AddCommand(newGitConfigCheckCmd(v, resolver))
 	return cmd
 }
