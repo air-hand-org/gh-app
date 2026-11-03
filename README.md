@@ -64,6 +64,21 @@ are sequential, not transactional: a write failure can leave a partial update.
 This changes future commit attribution, not push authentication or existing
 commits.
 
+Check without changing configuration:
+
+```sh
+gh-app git-config-check
+```
+
+`git-config-check` compares effective `git config --get user.name` (normal Git
+scope precedence) exactly with the authenticated App bot name. It prints
+confirmation and exits 0 on a match; an unset/different name, Git error, or
+App authentication error exits nonzero. Mismatches show actual and expected names.
+It never writes config and does not check email or author/committer environment
+overrides. It needs Git and the same App credentials/network as `identity`, not
+an installation owner or `gh`. Future pre-tool or Git hooks can use its exit
+status as a guard; no hooks are installed by this command.
+
 ## Install the agent skill
 
 Print the embedded skill with `gh-app skills`, or install it into an explicitly
