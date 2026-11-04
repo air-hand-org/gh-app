@@ -1,5 +1,17 @@
 # Changelog
 
+## [0.8.0](https://github.com/air-hand-org/gh-app/compare/v0.7.0...v0.8.0) (2026-11-04)
+
+
+### Features
+
+* resolve App identity and configure Git attribution ([#66](https://github.com/air-hand-org/gh-app/issues/66)) ([a7c1764](https://github.com/air-hand-org/gh-app/commit/a7c176419f2279297746702b154b3623ad6e7d9e))
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/jferrl/go-githubauth to v1.11.0 ([#67](https://github.com/air-hand-org/gh-app/issues/67)) ([f864ad1](https://github.com/air-hand-org/gh-app/commit/f864ad174a42397029fe4983da1d7b721803372c))
+
 ## [0.7.0](https://github.com/air-hand-org/gh-app/compare/v0.6.1...v0.7.0) (2026-10-27)
 
 
