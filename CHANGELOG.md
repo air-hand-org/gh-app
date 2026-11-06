@@ -1,5 +1,12 @@
 # Changelog
 
+## [0.8.1](https://github.com/air-hand-org/gh-app/compare/v0.8.0...v0.8.1) (2026-11-06)
+
+
+### Bug Fixes
+
+* **deps:** update module github.com/jferrl/go-githubauth to v1.12.0 ([#75](https://github.com/air-hand-org/gh-app/issues/75)) ([03ddb3c](https://github.com/air-hand-org/gh-app/commit/03ddb3cfcdafca939b37686463a8b091191831ae))
+
 ## [0.8.0](https://github.com/air-hand-org/gh-app/compare/v0.7.0...v0.8.0) (2026-11-04)
 
 
