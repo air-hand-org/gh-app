@@ -1,5 +1,13 @@
 # Changelog
 
+## [0.8.2](https://github.com/air-hand-org/gh-app/compare/v0.8.1...v0.8.2) (2026-11-14)
+
+
+### Bug Fixes
+
+* **deps:** update dependency go to v1.27.4 ([#88](https://github.com/air-hand-org/gh-app/issues/88)) ([6571210](https://github.com/air-hand-org/gh-app/commit/6571210526e2361e59fffd07399383d3e7e289b7))
+* **deps:** update module golang.org/x/oauth2 to v0.38.0 ([#85](https://github.com/air-hand-org/gh-app/issues/85)) ([5beb5bb](https://github.com/air-hand-org/gh-app/commit/5beb5bbb3ecd6e63bb9eceb89fc3da04915fdebc))
+
 ## [0.8.1](https://github.com/air-hand-org/gh-app/compare/v0.8.0...v0.8.1) (2026-11-08)
 
 
